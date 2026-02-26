@@ -28,6 +28,7 @@ class WavEncoder:
         inputs = self.processor(
             audio, return_tensors="pt", sampling_rate=settings.encoder_sample_rate
         )
+        inputs = {k: v.to(self.device) for k, v in inputs.items()}
         with torch.no_grad():
             outputs = self.model(**inputs, output_hidden_states=True)
         # return 6th layer's hidden state

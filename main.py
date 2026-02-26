@@ -11,12 +11,8 @@ def main():
     encoder = WavEncoder(settings)
     vocoder = HifiGANVocoder(settings)
 
-    source_audio = (
-        WavReader(settings.source_wav_path).process_wav(settings).to(settings.device)
-    )
-    matching_audio = (
-        WavReader(settings.matching_wav_path).process_wav(settings).to(settings.device)
-    )
+    source_audio = WavReader(settings.source_wav_path).process_wav(settings)
+    matching_audio = WavReader(settings.matching_wav_path).process_wav(settings)
 
     encoded_source_audio = encoder(source_audio)[0]
     encoded_matching_audio = encoder(matching_audio)[0]
@@ -27,7 +23,7 @@ def main():
     decoded_audio = vocoder(pred_source_audio.unsqueeze(0))
 
     torchaudio.save(
-        settings.output_wav_path, decoded_audio, settings.vocoder_sample_rate
+        settings.output_wav_path, decoded_audio.cpu(), settings.vocoder_sample_rate
     )
 
 
