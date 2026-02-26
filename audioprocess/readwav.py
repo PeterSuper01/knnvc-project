@@ -2,8 +2,8 @@ import torchaudio
 
 
 class WavReader:
-    def __init__(self, file_path: str):
-        self.waveform, self.sample_rate = torchaudio.load(file_path)
+    def __init__(self, file_path: str, settings):
+        self.waveform, self.sample_rate = torchaudio.load(file_path).to(settings.device)
 
     def read_wav(self):
         return self.waveform, self.sample_rate
