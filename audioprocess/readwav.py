@@ -21,9 +21,7 @@ class WavReader:
 
     def process_wav(self, settings):
         self.mono_wav()
-        processed_wav = self.resample_wav(settings.encoder_sample_rate).to(
-            settings.device
-        )
+        processed_wav = self.resample_wav(settings.encoder_sample_rate)
         return processed_wav.squeeze(0)
 
 
