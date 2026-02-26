@@ -22,12 +22,8 @@ def main():
     )
     decoded_audio = vocoder(pred_source_audio.unsqueeze(0))
 
-    print(decoded_audio.shape)
     torchaudio.save(
-        settings.output_wav_path,
-        decoded_audio,
-        settings.vocoder_sample_rate,
-        format="wav",
+        settings.output_wav_path, decoded_audio, settings.vocoder_sample_rate
     )
 
 

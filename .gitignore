@@ -3,3 +3,4 @@ __pycache__/
 .cursor/
 .env
 data/
+output/
