@@ -11,8 +11,8 @@ def main():
     encoder = WavEncoder(settings)
     vocoder = HifiGANVocoder(settings)
 
-    source_audio = WavReader(settings.source_wav_path).process_wav()
-    matching_audio = WavReader(settings.matching_wav_path).process_wav()
+    source_audio = WavReader(settings.source_wav_path, settings).process_wav()
+    matching_audio = WavReader(settings.matching_wav_path, settings).process_wav()
 
     encoded_source_audio = encoder(source_audio)[0]
     encoded_matching_audio = encoder(matching_audio)[0]
