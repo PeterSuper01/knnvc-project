@@ -8,18 +8,18 @@ from torch import Tensor
 from audioprocess.readwav import WavReader
 from config import settings
 
-# load_dotenv()
-# token = os.getenv("HF_TOKEN")
-
 
 class WavEncoder:
-    def __init__(self):
+    def __init__(self, settings):
+        self.device = settings.device
         self.processor = Wav2Vec2FeatureExtractor.from_pretrained(
             "microsoft/wavlm-large", token=settings.hf_token
         )
         self.model = WavLMModel.from_pretrained(
             "microsoft/wavlm-large", token=settings.hf_token
-        )
+        ).to(self.device)
+
+        self.model.eval()
 
     def __call__(self, audio: Tensor) -> Tensor:
         """

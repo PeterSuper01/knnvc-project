@@ -1,14 +1,12 @@
 import torch
 from torch import Tensor
 
-from models.encoder import WavEncoder
-from audioprocess.readwav import WavReader
-
 
 class HifiGANVocoder:
-    def __init__(self):
+    def __init__(self, settings):
+        self.device = settings.device
         self.model = torch.hub.load(
-            "bshall/knn-vc", "hifigan_wavlm", trust_repo=True, device="cpu"
+            "bshall/knn-vc", "hifigan_wavlm", trust_repo=True, device=self.device
         )[0]
         self.model.eval()
 

@@ -8,8 +8,8 @@ from models.knn import knn_search
 
 
 def main():
-    encoder = WavEncoder()
-    vocoder = HifiGANVocoder()
+    encoder = WavEncoder(settings)
+    vocoder = HifiGANVocoder(settings)
 
     source_audio = WavReader(settings.source_wav_path).process_wav()
     matching_audio = WavReader(settings.matching_wav_path).process_wav()
@@ -17,7 +17,9 @@ def main():
     encoded_source_audio = encoder(source_audio)[0]
     encoded_matching_audio = encoder(matching_audio)[0]
 
-    pred_source_audio = knn_search(encoded_source_audio, encoded_matching_audio, k=4)
+    pred_source_audio = knn_search(
+        encoded_source_audio, encoded_matching_audio, k=4, device=settings.device
+    )
     decoded_audio = vocoder(pred_source_audio.unsqueeze(0))
 
     print(decoded_audio.shape)
