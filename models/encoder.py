@@ -28,17 +28,6 @@ class WavEncoder:
         return: [B, T, 1024]
         T is the number of frames in the audio, which is L / 320
         """
-        # inputs = self.processor(
-        #     audio, return_tensors="pt", sampling_rate=settings.encoder_sample_rate
-        # )
-        # inputs = {k: v.to(self.device) for k, v in inputs.items()}
-        # print(f"Input length: {len(inputs['input_values'][0])}")
-        # with torch.no_grad():
-        #     outputs = self.model(**inputs, output_hidden_states=True)
-        # # return 6th layer's hidden state
-        # return outputs.hidden_states[6]
-
-        # chunk inference
         window_sec = 20.0
         overlap_sec = 2.0
 
