@@ -10,6 +10,8 @@ class Settings(BaseSettings):
     output_wav_path: str
     encoder_sample_rate: int = 16000
     vocoder_sample_rate: int = 16000
+    encoder_window_sec: float = 120.0
+    encoder_overlap_sec: float = 2.0
     k: int = 4
 
     model_config = SettingsConfigDict(env_file=".env")
